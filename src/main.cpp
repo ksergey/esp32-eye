@@ -4,7 +4,13 @@
 #include <AnimatedGIF.h>
 #include <Arduino_GFX_Library.h>
 
-#include "image.h"
+#include "darthvader.h"
+#include "hyperspace.h"
+#include "nostromo.h"
+#include "x_wing.h"
+#include "eye.h"
+
+#define GIF_IMAGE eye
 
 Arduino_DataBus* bus = new Arduino_ESP32SPI(GC9A01_SPI_CONFIG_DC /* DC */, GC9A01_SPI_CONFIG_CS /* CS */,
     GC9A01_SPI_BUS_SCLK /* SCK */, GC9A01_SPI_BUS_MOSI /* MOSI */, GFX_NOT_DEFINED /* MISO */);
@@ -118,7 +124,7 @@ void gif_draw(GIFDRAW* pDraw) {
 }
 
 void loop() {
-  auto rc = gif.open((uint8_t*)compressed_gif, compressed_gif_len, gif_draw);
+  auto rc = gif.open((uint8_t*)GIF_IMAGE, sizeof(GIF_IMAGE), gif_draw);
   if (rc) {
     while (rc) {
       rc = gif.playFrame(true, nullptr);
